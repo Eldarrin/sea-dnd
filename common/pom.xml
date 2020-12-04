@@ -2,16 +2,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>sea-dnd</artifactId>
+        <groupId>io.eldarrin</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.eldarrin</groupId>
-    <artifactId>sea-dnd</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-    <modules>
-        <module>abilities</module>
-        <module>common</module>
-    </modules>
-    <packaging>pom</packaging>
+    <groupId>io.eldarrin.sea-dnd</groupId>
+    <artifactId>common</artifactId>
+
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -23,7 +23,11 @@
 
         <vertx.version>4.0.0.CR1</vertx.version>
         <junit-jupiter.version>5.4.0</junit-jupiter.version>
+
+        <jkube.version>1.0.2</jkube.version>
         <slf4j.version>1.7.30</slf4j.version>
+
+
     </properties>
 
     <dependencyManagement>
@@ -39,76 +43,58 @@
     </dependencyManagement>
 
     <dependencies>
-        <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-web-client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-web</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>io.vertx</groupId>
-            <artifactId>vertx-junit5</artifactId>
-            <scope>test</scope>
+            <artifactId>vertx-web-graphql</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>${junit-jupiter.version}</version>
-            <scope>test</scope>
+       <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-web-api-contract</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit-jupiter.version}</version>
-            <scope>test</scope>
-        </dependency>
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
             <version>${slf4j.version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-mongo-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-redis-client</artifactId>
+        </dependency>
+
 
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-service-discovery</artifactId>
+
         </dependency>
 
 
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-circuit-breaker</artifactId>
+
         </dependency>
+
 
         <dependency>
             <groupId>io.vertx</groupId>
-            <artifactId>vertx-service-proxy</artifactId>
-        </dependency>
+            <artifactId>vertx-config-kubernetes-configmap</artifactId>
 
+        </dependency>
         <dependency>
             <groupId>io.vertx</groupId>
-            <artifactId>vertx-codegen</artifactId>
-            <scope>provided</scope>
+            <artifactId>vertx-config</artifactId>
+
         </dependency>
+
+
+
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven-compiler-plugin.version}</version>
-                <configuration>
-                    <source>11</source>
-                    <target>11</target>
-                    <release>11</release>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                    <generatedSourcesDirectory>src/main/generated</generatedSourcesDirectory>
-                    <generatedTestSourcesDirectory>src/test/generated</generatedTestSourcesDirectory>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>
