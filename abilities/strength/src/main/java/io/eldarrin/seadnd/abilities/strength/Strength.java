@@ -18,17 +18,17 @@ public class Strength {
     private String notes;
 
     public Strength(JsonObject json) {
-        //StrengthConverter.fromJson(json, this);
+        StrengthConverter.fromJson(json, this);
     }
 
     public JsonObject toJson() {
         JsonObject json = new JsonObject();
-        //StrengthConverter.toJson(this, json);
+        StrengthConverter.toJson(this, json);
         return json;
     }
 
     public String toString() {
-        return "";
+        return this.toJson().encodePrettily();
     }
 
     public Integer getScore() {

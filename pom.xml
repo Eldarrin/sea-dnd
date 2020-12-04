@@ -90,7 +90,8 @@
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-codegen</artifactId>
-            <scope>provided</scope>
+            <classifier>processor</classifier>
+
         </dependency>
     </dependencies>
 

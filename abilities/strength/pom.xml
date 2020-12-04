@@ -70,7 +70,7 @@
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-codegen</artifactId>
-
+            <classifier>processor</classifier>
         </dependency>
 
         <dependency>
@@ -90,16 +90,16 @@
                 <version>${maven-compiler-plugin.version}</version>
                 <configuration>
                     <release>11</release>
-                    <source>1.11</source>
-                    <target>1.11</target>
-                    <annotationProcessors>
+                    <source>11</source>
+                    <target>11</target>
+<!--                    <annotationProcessors>
                         <annotationProcessor>io.vertx.codegen.CodeGenProcessor</annotationProcessor>
-                    </annotationProcessors>
+                    </annotationProcessors> -->
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <generatedSourcesDirectory>src/main/generated</generatedSourcesDirectory>
                     <generatedTestSourcesDirectory>src/test/generated</generatedTestSourcesDirectory>
                 </configuration>
-                <executions>
+<!--                <executions>
                     <execution>
                         <id>default-compile</id>
                         <configuration>
@@ -124,7 +124,7 @@
                             </compilerArgs>
                         </configuration>
                     </execution>
-                </executions>
+                </executions> -->
             </plugin>
             <plugin>
                 <artifactId>maven-shade-plugin</artifactId>
@@ -165,6 +165,18 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>${exec-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>test</id>
+                        <phase>generate-sources</phase>
+
+                        <configuration>
+                            <sources>
+                                <source>${basedir}src/main/generated</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
                 <configuration>
                     <mainClass>io.vertx.core.Launcher</mainClass>
                     <arguments>
@@ -175,6 +187,7 @@
             </plugin>
         </plugins>
     </build>
+
 
     <profiles>
         <profile>

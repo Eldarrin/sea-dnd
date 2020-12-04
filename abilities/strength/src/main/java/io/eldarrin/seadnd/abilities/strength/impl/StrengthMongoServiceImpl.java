@@ -52,12 +52,11 @@ public class StrengthMongoServiceImpl extends MongoRepositoryWrapper implements 
         Promise<Strength> promise = Promise.promise();
         promise.future().onComplete(resultHandler);
 logger.info("future set");
-/*        Strength s = new Strength();
-        s.setScore(1);
-        s.setHitProb(1);
+        JsonObject jsonObject = new JsonObject().put("score", 1).put("hitProb", 1);
+        Strength s = new Strength(jsonObject);
 logger.info("going to complete");
 logger.info("service:" + s.toJson().encodePrettily());
-        promise.complete(s); */
+        promise.complete(s);
         logger.info("complete");
         return this;
 
