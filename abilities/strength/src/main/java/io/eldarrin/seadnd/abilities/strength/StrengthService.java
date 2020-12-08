@@ -18,7 +18,7 @@ public interface StrengthService {
     StrengthService initialisePersistence(Handler<AsyncResult<Void>> resultHandler);
 
     @Fluent
-    StrengthService getStrengthStats(Integer score, Integer percentageScore, Handler<AsyncResult<Strength>> resultHandler);
+    StrengthService getStrengthStats(Integer score, Integer percentileScore, Boolean isWarrior, Handler<AsyncResult<Strength>> resultHandler);
 
     @Fluent
     StrengthService addStrengthStats(Strength strength, Handler<AsyncResult<String>> resultHandler);

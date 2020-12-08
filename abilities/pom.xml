@@ -40,8 +40,8 @@
                     <target>11</target>
                     <release>11</release>
                     <encoding>${project.build.sourceEncoding}</encoding>
-                    <generatedSourcesDirectory>src/main/generated</generatedSourcesDirectory>
-                    <generatedTestSourcesDirectory>src/test/generated</generatedTestSourcesDirectory>
+                    <generatedSourcesDirectory>target/main/generated</generatedSourcesDirectory>
+                    <generatedTestSourcesDirectory>target/test/generated</generatedTestSourcesDirectory>
                 </configuration>
             </plugin>
         </plugins>

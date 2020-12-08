@@ -172,7 +172,7 @@
 
                         <configuration>
                             <sources>
-                                <source>${basedir}src/main/generated</source>
+                                <source>${basedir}/target/main/generated</source>
                             </sources>
                         </configuration>
                     </execution>

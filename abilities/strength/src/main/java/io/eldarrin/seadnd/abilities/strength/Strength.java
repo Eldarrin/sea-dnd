@@ -7,7 +7,8 @@ import io.vertx.core.json.JsonObject;
 public class Strength {
 
     private Integer score;
-    private Integer percentileScore;
+    private Integer lowPercentileScore;
+    private Integer highPercentileScore;
     private Integer hitProb;
     private Integer damageAdj;
     private Integer weightAllow;
@@ -39,12 +40,20 @@ public class Strength {
         this.score = score;
     }
 
-    public Integer getPercentileScore() {
-        return percentileScore;
+    public Integer getLowPercentileScore() {
+        return lowPercentileScore;
     }
 
-    public void setPercentileScore(Integer percentileScore) {
-        this.percentileScore = percentileScore;
+    public void setLowPercentileScore(Integer lowPercentileScore) {
+        this.lowPercentileScore = lowPercentileScore;
+    }
+
+    public Integer getHighPercentileScore() {
+        return highPercentileScore;
+    }
+
+    public void setHighPercentileScore(Integer highPercentileScore) {
+        this.highPercentileScore = highPercentileScore;
     }
 
     public Integer getHitProb() {

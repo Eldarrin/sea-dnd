@@ -1,7 +1,7 @@
 package io.eldarrin.seadnd.abilities.strength;
 
 import io.eldarrin.seadnd.abilities.strength.api.RestStrengthAPIVerticle;
-import io.eldarrin.seadnd.abilities.strength.impl.StrengthMongoServiceImpl;
+import io.eldarrin.seadnd.abilities.strength.impl.StrengthMySqlServiceImpl;
 import io.eldarrin.seadnd.common.BaseMicroserviceVerticle;
 import io.vertx.config.ConfigRetriever;
 import io.vertx.config.ConfigRetrieverOptions;
@@ -33,15 +33,19 @@ public class StrengthVerticle extends BaseMicroserviceVerticle {
 
         retriever.getConfig(res -> {
             if (res.succeeded()) {
-                JsonObject mongoConfig = new JsonObject()
-                        .put("host", res.result().getString("database.host"))
-                        .put("port", res.result().getInteger("database.port"))
-                        .put("db_name", "abilities");
-                        //.put("username", System.getenv("DB_USERNAME"))
-                        //.put("password", System.getenv("DB_PASSWORD"))
+                JsonObject mysqlConfig = new JsonObject()
+                        .put("port", 3306)
+                        .put("host", "mysql")
+                        .put("database", "abilities")
+                        .put("username", "userDMC")
+                        .put("password", "Kt4yRy3vJc8q8uhi");
+                //.put("username", System.getenv("DB_USERNAME"))
+                //.put("password", System.getenv("DB_PASSWORD"))
 
-                strengthService = new StrengthMongoServiceImpl(vertx, mongoConfig);
-                initPersistence(strengthService);
+
+                    strengthService = new StrengthMySqlServiceImpl(vertx, mysqlConfig);
+
+                initPersistence();
                 deployRestVerticle();
             } else {
                 logger.error("no mongo config found");
@@ -57,9 +61,9 @@ public class StrengthVerticle extends BaseMicroserviceVerticle {
         return promise.future().map(r -> null);
     }
 
-    private Promise<Void> initPersistence(StrengthService service) {
+    private Promise<Void> initPersistence() {
         Promise<Void> promise = Promise.promise();
-        service.initialisePersistence(promise);
+        strengthService.initialisePersistence(promise);
         return promise;
     }
 

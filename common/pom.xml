@@ -22,11 +22,11 @@
         <exec-maven-plugin.version>1.5.0</exec-maven-plugin.version>
 
         <vertx.version>4.0.0.CR1</vertx.version>
-        <junit-jupiter.version>5.4.0</junit-jupiter.version>
+        <junit-jupiter.version>5.6.2</junit-jupiter.version>
 
         <jkube.version>1.0.2</jkube.version>
         <slf4j.version>1.7.30</slf4j.version>
-
+        <assertj-core.version>3.8.0</assertj-core.version>
 
     </properties>
 
@@ -64,6 +64,10 @@
         </dependency>
         <dependency>
             <groupId>io.vertx</groupId>
+            <artifactId>vertx-mysql-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.vertx</groupId>
             <artifactId>vertx-redis-client</artifactId>
         </dependency>
 
@@ -93,8 +97,28 @@
 
         </dependency>
 
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-junit5</artifactId>
+            <scope>test</scope>
+        </dependency>
 
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj-core.version}</version>
+            <scope>test</scope>
+        </dependency>
 
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

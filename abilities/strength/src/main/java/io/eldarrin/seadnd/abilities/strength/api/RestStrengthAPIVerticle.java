@@ -12,6 +12,8 @@ import io.vertx.ext.web.handler.BodyHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Locale;
+
 public class RestStrengthAPIVerticle extends RestAPIVerticle {
 
     public static final String SERVICE_NAME = "strength-abilities-rest-api";
@@ -59,18 +61,22 @@ public class RestStrengthAPIVerticle extends RestAPIVerticle {
         try {
             logger.info("in proc");
             String sScore = rc.request().getParam("score");
-            Integer score = 0;
+            Integer score = 7;
             if (sScore != null) {
                 score = Integer.parseInt(sScore);
             }
             logger.info("int parse score");
-            String sPercentageScore = rc.request().getParam("percentageScore");
-            Integer percentageScore = 0;
-            if (sPercentageScore != null) {
-                percentageScore = Integer.parseInt(sPercentageScore);
+            String sPercentileScore = rc.request().getParam("percentileScore");
+            Boolean isWarrior = false;
+            if (rc.request().getParam("isWarrior") != null) {
+                isWarrior = rc.request().getParam("isWarrior").toLowerCase(Locale.ROOT).equals("true");
+            }
+            Integer percentileScore = 0;
+            if (sPercentileScore != null) {
+                percentileScore = Integer.parseInt(sPercentileScore);
             }
             logger.info("int parse percScore");
-            strengthService.getStrengthStats(score, percentageScore, resultHandlerNonEmpty(rc));
+            strengthService.getStrengthStats(score, percentileScore, isWarrior, resultHandlerNonEmpty(rc));
         } catch (Exception e) {
             logger.error("retrieve", e);
         }
