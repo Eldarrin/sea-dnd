@@ -9,12 +9,8 @@ import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.sqlclient.Row;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class StrengthMySqlServiceImpl extends MySqlRepositoryWrapper implements StrengthService {
-
-    private static final Logger logger = LoggerFactory.getLogger(StrengthMySqlServiceImpl.class);
 
     private String TABLE_NAME = "strength";
 
@@ -37,7 +33,6 @@ public class StrengthMySqlServiceImpl extends MySqlRepositoryWrapper implements 
         if (!isWarrior) percentileScore = 0;
         String sql = "select * from strength where score = " + score + " and lowPercentileScore <= " +
                 percentileScore + " and highPercentileScore >= " + percentileScore + ";";
-        logger.info(sql);
         this.retrieveAll(sql).future().onComplete(res -> {
             // convert and alter to jsonobject
             if (res.succeeded()) {
@@ -65,9 +60,4 @@ public class StrengthMySqlServiceImpl extends MySqlRepositoryWrapper implements 
 
     }
 
-    @Override
-    public StrengthService addStrengthStats(Strength strength, Handler<AsyncResult<String>> resultHandler) {
-
-        return this;
-    }
 }

@@ -234,24 +234,18 @@ public class RestAPIVerticle extends BaseMicroserviceVerticle {
      * @return generated handler
      */
     protected <T> Handler<AsyncResult<T>> resultHandlerNonEmpty(RoutingContext context) {
-        log.info("in resulthandler");
         return ar -> {
             if (ar.succeeded()) {
-                log.info("in resulthandler success");
                 T res = ar.result();
                 if (res == null) {
-                    log.info("in resulthandler not found");
                     notFound(context);
                 } else {
-                    log.info("in resulthandler context bit");
-                    log.info(res.toString());
                     context.response()
                             .putHeader(CONTENT_TYPE, APPLICATION_JSON)
                             .end(res.toString());
                 }
             } else {
                 internalError(context, ar.cause());
-                log.error("ResultHandlerNonEmpty", ar.cause());
             }
         };
     }

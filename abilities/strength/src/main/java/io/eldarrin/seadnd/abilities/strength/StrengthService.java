@@ -20,7 +20,4 @@ public interface StrengthService {
     @Fluent
     StrengthService getStrengthStats(Integer score, Integer percentileScore, Boolean isWarrior, Handler<AsyncResult<Strength>> resultHandler);
 
-    @Fluent
-    StrengthService addStrengthStats(Strength strength, Handler<AsyncResult<String>> resultHandler);
-
 }

@@ -36,12 +36,9 @@ public class StrengthVerticle extends BaseMicroserviceVerticle {
                 JsonObject mysqlConfig = new JsonObject()
                         .put("port", 3306)
                         .put("host", "mysql")
-                        .put("database", "abilities")
-                        .put("username", "userDMC")
-                        .put("password", "Kt4yRy3vJc8q8uhi");
-                //.put("username", System.getenv("DB_USERNAME"))
-                //.put("password", System.getenv("DB_PASSWORD"))
-
+						.put("username", System.getenv("DB_USERNAME"))
+                        .put("password", System.getenv("DB_PASSWORD"))
+                        .put("database", System.getenv("DB_NAME"));
 
                     strengthService = new StrengthMySqlServiceImpl(vertx, mysqlConfig);
 
