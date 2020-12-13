@@ -10,10 +10,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.eldarrin.sea-dnd.abilities</groupId>
-    <artifactId>strength</artifactId>
+    <artifactId>dexterity</artifactId>
 
     <properties>
-        <main.verticle>io.eldarrin.seadnd.abilities.strength.StrengthVerticle</main.verticle>
+        <main.verticle>io.eldarrin.seadnd.abilities.dexterity.DexterityVerticle</main.verticle>
     </properties>
 
 </project>

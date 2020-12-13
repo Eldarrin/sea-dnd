@@ -19,7 +19,7 @@ public class RestStrengthAPIVerticle extends RestAPIVerticle {
 
     private static final Logger logger = LoggerFactory.getLogger(RestStrengthAPIVerticle.class);
 
-    private StrengthService strengthService;
+    private final StrengthService strengthService;
 
     public RestStrengthAPIVerticle(StrengthService strengthService) {
         super();

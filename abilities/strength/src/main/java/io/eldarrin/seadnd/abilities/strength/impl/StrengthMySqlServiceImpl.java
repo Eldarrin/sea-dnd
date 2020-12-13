@@ -12,8 +12,6 @@ import io.vertx.sqlclient.Row;
 
 public class StrengthMySqlServiceImpl extends MySqlRepositoryWrapper implements StrengthService {
 
-    private String TABLE_NAME = "strength";
-
     public StrengthMySqlServiceImpl(Vertx vertx, JsonObject config) {
         super(vertx, config);
     }

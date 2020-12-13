@@ -10,10 +10,6 @@ import io.vertx.core.Handler;
 @ProxyGen
 public interface StrengthService {
 
-    String SERVICE_NAME = "strength-abilities-eb-service";
-
-    String SERVICE_ADDRESS = "service.abilities.strength";
-
     @Fluent
     StrengthService initialisePersistence(Handler<AsyncResult<Void>> resultHandler);
 

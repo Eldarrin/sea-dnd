@@ -2,7 +2,7 @@ package io.eldarrin.seadnd.abilities.strength.impl;
 
 public class StrengthMySqlStatements {
 
-    public static final String DROP_CREATE_TABLE = "DROP TABLE strength; CREATE TABLE strength (score INT NOT NULL, " +
+    public static final String DROP_CREATE_TABLE = "DROP TABLE IF EXISTS strength; CREATE TABLE strength (score INT NOT NULL, " +
             "lowPercentileScore INT, " +
             "highPercentileScore INT, " +
             "hitProb INT, " +
