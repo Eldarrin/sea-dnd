@@ -1,7 +1,7 @@
-package io.eldarrin.seadnd.abilities.strength;
+package io.eldarrin.seadnd.abilities.constitution;
 
-import io.eldarrin.seadnd.abilities.strength.api.RestStrengthAPIVerticle;
-import io.eldarrin.seadnd.abilities.strength.impl.StrengthMySqlServiceImpl;
+import io.eldarrin.seadnd.abilities.constitution.api.RestConstitutionAPIVerticle;
+import io.eldarrin.seadnd.abilities.constitution.impl.ConstitutionMySqlServiceImpl;
 import io.eldarrin.seadnd.common.BaseMicroserviceVerticle;
 import io.vertx.config.ConfigRetriever;
 import io.vertx.config.ConfigRetrieverOptions;
@@ -13,11 +13,11 @@ import io.vertx.core.json.JsonObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class StrengthVerticle extends BaseMicroserviceVerticle {
+public class ConstitutionVerticle extends BaseMicroserviceVerticle {
 
-    private StrengthService strengthService;
+    private ConstitutionService constitutionService;
 
-    private static final Logger logger = LoggerFactory.getLogger(StrengthVerticle.class);
+    private static final Logger logger = LoggerFactory.getLogger(ConstitutionVerticle.class);
 
     @Override
     public void start(Promise<Void> startPromise) {
@@ -25,7 +25,7 @@ public class StrengthVerticle extends BaseMicroserviceVerticle {
                 .setType("configmap")
                 .setConfig(new JsonObject()
                         .put("namespace", "sea-dnd")
-                        .put("name", "strength.abilities")
+                        .put("name", "constitution.abilities")
                 );
 
         ConfigRetriever retriever = ConfigRetriever.create(vertx,
@@ -36,11 +36,11 @@ public class StrengthVerticle extends BaseMicroserviceVerticle {
                 JsonObject mysqlConfig = new JsonObject()
                         .put("port", 3306)
                         .put("host", "mysql")
-						.put("username", System.getenv("DB_USERNAME"))
+                        .put("username", System.getenv("DB_USERNAME"))
                         .put("password", System.getenv("DB_PASSWORD"))
                         .put("database", System.getenv("DB_NAME"));
 
-                    strengthService = new StrengthMySqlServiceImpl(vertx, mysqlConfig);
+                constitutionService = new ConstitutionMySqlServiceImpl(vertx, mysqlConfig);
 
                 initPersistence();
                 deployRestVerticle();
@@ -53,14 +53,14 @@ public class StrengthVerticle extends BaseMicroserviceVerticle {
 
     private Future<Void> deployRestVerticle() {
         Promise<String> promise = Promise.promise();
-        vertx.deployVerticle(new RestStrengthAPIVerticle(strengthService),
+        vertx.deployVerticle(new RestConstitutionAPIVerticle(constitutionService),
                 new DeploymentOptions().setConfig(config()), promise);
         return promise.future().map(r -> null);
     }
 
     private Promise<Void> initPersistence() {
         Promise<Void> promise = Promise.promise();
-        strengthService.initialisePersistence(promise);
+        constitutionService.initialisePersistence(promise);
         return promise;
     }
 

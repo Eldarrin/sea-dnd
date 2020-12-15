@@ -15,6 +15,7 @@
     <modules>
         <module>strength</module>
         <module>dexterity</module>
+        <module>constitution</module>
     </modules>
     <packaging>pom</packaging>
 

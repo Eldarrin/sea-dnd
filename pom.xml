@@ -10,7 +10,6 @@
     <modules>
         <module>abilities</module>
         <module>common</module>
-        <module>dexterity</module>
     </modules>
     <packaging>pom</packaging>
 

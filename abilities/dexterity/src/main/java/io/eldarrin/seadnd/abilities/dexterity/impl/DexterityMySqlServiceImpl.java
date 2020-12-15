@@ -36,7 +36,6 @@ public class DexterityMySqlServiceImpl extends MySqlRepositoryWrapper implements
         promise.future().onComplete(resultHandler);
         String sql = "select * from dexterity where score = " + score + ";";
         this.retrieveAll(sql).future().onComplete(res -> {
-            // convert and alter to jsonobject
             if (res.succeeded()) {
                 for (Row row : res.result()) {
                     JsonObject json = new JsonObject()

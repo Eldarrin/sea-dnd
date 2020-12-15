@@ -20,7 +20,7 @@ public class DexterityVerticle extends BaseMicroserviceVerticle {
     private static final Logger logger = LoggerFactory.getLogger(DexterityVerticle.class);
 
     @Override
-    public void start(Promise<Void> startPromise) throws Exception {
+    public void start(Promise<Void> startPromise) {
         ConfigStoreOptions store = new ConfigStoreOptions()
                 .setType("configmap")
                 .setConfig(new JsonObject()
