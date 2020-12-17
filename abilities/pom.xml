@@ -16,6 +16,7 @@
         <module>strength</module>
         <module>dexterity</module>
         <module>constitution</module>
+        <module>intelligence</module>
     </modules>
     <packaging>pom</packaging>
 
