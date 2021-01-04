@@ -31,32 +31,36 @@ public class IntelligenceMySqlServiceImpl extends MySqlRepositoryWrapper impleme
         this.retrieveAll(sql).future().onComplete(res -> {
             // convert and alter to jsonobject
             if (res.succeeded()) {
-                for (Row row : res.result()) {
-                    JsonObject json = new JsonObject()
-                            .put("score", row.getInteger(0))
-                            .put("noOfLanguages", row.getInteger(1))
-                            .put("spellLevel", row.getInteger(2))
-                            .put("chanceToLearnSpell", row.getInteger(3));
+                if (res.result().size() == 0) {
+                    promise.complete(null);
+                } else {
+                    for (Row row : res.result()) {
+                        JsonObject json = new JsonObject()
+                                .put("score", row.getInteger(0))
+                                .put("noOfLanguages", row.getInteger(1))
+                                .put("spellLevel", row.getInteger(2))
+                                .put("chanceToLearnSpell", row.getInteger(3));
 
-                    if (row.getBoolean(5)) {
-                        json.put("maxSpellsPerLevel", "All");
-                    } else {
-                        json.put("maxSpellsPerLevel", row.getInteger(4).toString());
-                    }
-                    if (row.getInteger(6) > 0) {
-                        json.put("spellIllusionImmunity", "-");
-                    } else if (row.getInteger(6) == 1) {
-                        json.put("spellIllusionImmunity", "1st level illusions");
-                    } else if (row.getInteger(6) == 2) {
-                        json.put("spellIllusionImmunity", "2nd level illusions");
-                    } else if (row.getInteger(6) == 3) {
-                        json.put("spellIllusionImmunity", "3rd level illusions");
-                    } else {
-                        json.put("spellIllusionImmunity", row.getInteger(6) + "th level illusions");
-                    }
+                        if (row.getBoolean(5)) {
+                            json.put("maxSpellsPerLevel", "All");
+                        } else {
+                            json.put("maxSpellsPerLevel", row.getInteger(4).toString());
+                        }
+                        if (row.getInteger(6) == 0) {
+                            json.put("spellIllusionImmunity", "-");
+                        } else if (row.getInteger(6) == 1) {
+                            json.put("spellIllusionImmunity", "1st level illusions");
+                        } else if (row.getInteger(6) == 2) {
+                            json.put("spellIllusionImmunity", "1st to 2nd level illusions");
+                        } else if (row.getInteger(6) == 3) {
+                            json.put("spellIllusionImmunity", "1st to 3rd level illusions");
+                        } else {
+                            json.put("spellIllusionImmunity", "1st to " + row.getInteger(6) + "th level illusions");
+                        }
 
-                    Intelligence i = new Intelligence(json);
-                    promise.complete(i);
+                        Intelligence i = new Intelligence(json);
+                        promise.complete(i);
+                    }
                 }
             } else {
                 promise.fail(res.cause());

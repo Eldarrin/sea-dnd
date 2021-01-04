@@ -41,17 +41,23 @@ public class RestConstitutionAPIVerticle extends RestAPIVerticle {
     private void apiRetrieve(RoutingContext rc) {
         try {
             String sScore = rc.request().getParam("score");
-            Integer score = 4;
-            if (sScore != null) {
-                score = Integer.parseInt(sScore);
-            }
-            Boolean isWarrior = false;
-            if (rc.request().getParam("isWarrior") != null) {
+            String sIsWarrior = rc.request().getParam("isWarrior");
+            boolean isWarrior;
+            if (sIsWarrior == null) {
+                isWarrior = false;
+            } else {
                 isWarrior = rc.request().getParam("isWarrior").toLowerCase(Locale.ROOT).equals("true");
             }
-            constitutionService.getConstitutionStats(score, isWarrior, resultHandlerNonEmpty(rc));
+            if (sScore != null) {
+                constitutionService.getConstitutionStats(Integer.parseInt(sScore),
+                        isWarrior, resultHandler(rc));
+            } else {
+                notFound(rc);
+            }
         } catch (Exception e) {
             logger.error("retrieve", e);
+            badRequest(rc, e);
         }
+
     }
 }

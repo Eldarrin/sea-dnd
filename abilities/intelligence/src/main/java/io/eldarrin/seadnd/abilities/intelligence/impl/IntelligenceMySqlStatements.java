@@ -8,7 +8,7 @@ public class IntelligenceMySqlStatements {
             "chanceToLearnSpell INT, " +
             "maxSpellsPerLevel INT, " +
             "allSpellsAllowed BOOLEAN, " +
-            "spellIllusionImmunity INT, " +
+            "spellIllusionImmunity INT " +
             ");";
 
     public static final String LOAD_TABLE = "INSERT INTO intelligence (score, noOfLanguages, spellLevel, " +

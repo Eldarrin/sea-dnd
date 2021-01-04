@@ -8,11 +8,12 @@ import io.vertx.core.json.JsonObject;
 public class Intelligence {
 
     public Intelligence(JsonObject json) {
-
+        IntelligenceConverter.fromJson(json, this);
     }
 
     public JsonObject toJson() {
         JsonObject json = new JsonObject();
+        IntelligenceConverter.toJson(this, json);
         return json;
     }
 

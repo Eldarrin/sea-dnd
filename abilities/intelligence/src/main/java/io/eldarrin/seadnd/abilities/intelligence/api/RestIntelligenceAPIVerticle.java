@@ -41,13 +41,14 @@ public class RestIntelligenceAPIVerticle extends RestAPIVerticle {
     private void apiRetrieve(RoutingContext rc) {
         try {
             String sScore = rc.request().getParam("score");
-            Integer score = 7;
             if (sScore != null) {
-                score = Integer.parseInt(sScore);
+                intelligenceService.getIntelligenceStats(Integer.parseInt(sScore), resultHandlerNonEmpty(rc));
+            } else {
+                notFound(rc);
             }
-            intelligenceService.getIntelligenceStats(score, resultHandlerNonEmpty(rc));
         } catch (Exception e) {
             logger.error("retrieve", e);
+            badRequest(rc, e);
         }
     }
 }
